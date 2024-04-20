@@ -20,6 +20,10 @@ function App() {
     setInputValue(event.target.value);
   };
 
+  const deletePlayerHandle = () => {
+    
+  }
+
   return (
     <div className="backDrawTeams">
 
@@ -58,7 +62,7 @@ function App() {
           return (
             <div className="playerList">
               <p>- {player.name}</p>
-              <button>X</button>
+              <button onClick={deletePlayerHandle}>X</button>
             </div>
           )
         })}
