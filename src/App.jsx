@@ -20,9 +20,13 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  const deletePlayerHandle = () => {
-    
-  }
+  console.log(playersList);
+
+  const toggleDeleteStatus = (index) => {
+    const newPlayerList = [...playersList];
+    newPlayerList[index].delete = !newPlayerList[index].delete;
+    setPlayersList(newPlayerList);
+  } 
 
   return (
     <div className="backDrawTeams">
@@ -58,14 +62,14 @@ function App() {
 
       <div className="playerList">
         <h3>List of Players</h3>
-        {playersList.map(player => {
-          return (
-            <div className="playerList">
+        {playersList.map((player, index) => (
+          !player.delete && (
+            <div className="playerList" key={index}>
               <p>- {player.name}</p>
-              <button onClick={deletePlayerHandle}>X</button>
+              <button onClick={() => toggleDeleteStatus(index)}>X</button>
             </div>
           )
-        })}
+        ))}
         {/* 
         - Mapear player state. ✔
         - Si delete es false, que se muestre. Si no, si delete es true que no se muetre.
