@@ -134,7 +134,7 @@ function App() {
         - Mapear player state. ✔
         - Si delete es false, que se muestre. Si no, si delete es true que no se muetre. ✔
         - "X" cambia la propiedad delete de false a true para eliminarlo de la lista. ✔
-        - Hacer la lógica para generar la cantidad de equipos seleccionados de acuerdo a los jugadores cargados.
+        - Hacer la lógica para generar la cantidad de equipos seleccionados de acuerdo a los jugadores cargados. ✔
         */}
       </div>
 
