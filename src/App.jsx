@@ -15,6 +15,9 @@ function App() {
   const [selectedNumbers, setSelectedNumbers] = useState([1]);
   const [availableNumbers, setAvailableNumbers] = useState([...Array(5).keys()].map((index) => index + 1));
 
+  const [numberOfTeams, setNumberOfTeams] = useState(1); // Para almacenar el número de equipos
+  const [teams, setTeams] = useState([]); // Para almacenar los equipos generados
+
 
   const addPlayerHandle = () => {
     if (inputValue.trim !== '') {
@@ -39,6 +42,8 @@ function App() {
 
   const handleSumNum = (event) => {
     const selectedNumber = parseInt(event.target.value);
+    setNumberOfTeams(selectedNumber);
+
     if (selectedNumber === end) {
       // Si el usuario selecciona el último número del rango actual, se actualiza el rango
       setStart(end + 1);
@@ -50,6 +55,7 @@ function App() {
         newNumbers.push(i);
       }
       setNumbers(newNumbers);
+
     } else {
       // Si el usuario selecciona otro número, no se cambia el rango
       console.log("Selected number:", selectedNumber);
@@ -66,6 +72,24 @@ function App() {
       setAvailableNumbers(newAvailableNumbers);
     }
 
+  }
+
+  const generateTeams = () => {
+    // Filtrar jugadores que no tienen delete: true
+    const activePlayers = playersList.filter(player => !player.delete);
+
+    // Mezclar jugadores aleatoriamente
+    const shuffledPlayers = activePlayers.sort(() => 0.5 - Math.random());
+
+    // Crear equipos vacíos
+    const newTeams = Array.from({ length: numberOfTeams }, () => []);
+
+    // Distribuir jugadores en equipos
+    shuffledPlayers.forEach((player, index) => {
+      newTeams[index % numberOfTeams].push(player);
+    });
+
+    setTeams(newTeams);
   }
 
   return (
@@ -88,12 +112,12 @@ function App() {
         <label htmlFor="">number of teams</label>
 
         <select onChange={handleSumNum}>
-        {availableNumbers.map((number) => (
-          <option key={number} value={number}>
-            {number}
-          </option>
-        ))}
-      </select>
+          {availableNumbers.map((number) => (
+            <option key={number} value={number}>
+              {number}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="playerList">
@@ -108,13 +132,28 @@ function App() {
         ))}
         {/* 
         - Mapear player state. ✔
-        - Si delete es false, que se muestre. Si no, si delete es true que no se muetre.
-        - "X" cambia la propiedad delete de false a true para eliminarlo de la lista.
+        - Si delete es false, que se muestre. Si no, si delete es true que no se muetre. ✔
+        - "X" cambia la propiedad delete de false a true para eliminarlo de la lista. ✔
+        - Hacer la lógica para generar la cantidad de equipos seleccionados de acuerdo a los jugadores cargados.
         */}
       </div>
 
       <div className="draw">
-        <button>Generate Teams</button>
+        <button onClick={generateTeams}>Generate Teams</button>
+      </div>
+
+      <div className="generatedTeams">
+        <h3>Generated Teams</h3>
+        {teams.map((team, index) => (
+          <div key={index}>
+            <h4>Team {index + 1}</h4>
+            <ul>
+              {team.map((player, playerIndex) => (
+                <li key={playerIndex}>{player.name}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
 
