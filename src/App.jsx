@@ -18,7 +18,6 @@ function App() {
   const [numberOfTeams, setNumberOfTeams] = useState(1); // Para almacenar el número de equipos
   const [teams, setTeams] = useState([]); // Para almacenar los equipos generados
 
-
   const addPlayerHandle = () => {
     if (inputValue.trim !== '') {
 
@@ -32,7 +31,7 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  // console.log(playersList);
+  const activePlayersCount = playersList.filter(player => !player.delete).length;
 
   const toggleDeleteStatus = (index) => {
     const newPlayerList = [...playersList];
@@ -99,9 +98,8 @@ function App() {
 
       <div className="selectionMode">
 
-
         <div className="addPlayers">
-          <h2>Player</h2>
+          <h2>Players Name</h2>
           <input
             type="text"
             value={inputValue}
@@ -123,24 +121,21 @@ function App() {
           </select>
         </div>
 
-        <div className="playerList">
-          <h3>List of Players</h3>
-          {playersList.map((player, index) => (
-            !player.delete && (
-              <div className="playerList" key={index}>
-                <p>- {player.name}</p>
-                <button onClick={() => toggleDeleteStatus(index)}>X</button>
-              </div>
-            )
-          ))}
-          {/* 
-        - Mapear player state. ✔
-        - Si delete es false, que se muestre. Si no, si delete es true que no se muetre. ✔
-        - "X" cambia la propiedad delete de false a true para eliminarlo de la lista. ✔
-        - Hacer la lógica para generar la cantidad de equipos seleccionados de acuerdo a los jugadores cargados. ✔
-        */}
-        </div>
+      </div>
 
+      <h3 className='listOfPlayerTittle'>List of Players ({activePlayersCount})</h3>
+      <div className="playerList">
+        {playersList.map((player, index) => (
+          !player.delete && (
+            <div className='playerItems' key={index}>
+              <p>- {player.name}</p>
+              <button onClick={() => toggleDeleteStatus(index)}>X</button>
+            </div>
+          )
+        ))}
+      </div>
+
+      <div className="generateSection">
         <div className="draw">
           <button onClick={generateTeams}>Generate Teams</button>
         </div>
@@ -158,8 +153,8 @@ function App() {
             </div>
           ))}
         </div>
-
       </div>
+
     </div>
 
   )

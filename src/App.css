@@ -1,6 +1,32 @@
+.appName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .selectionMode {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 100px;
+}
+
+.listOfPlayerTittle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerList {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.generateSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
 }
