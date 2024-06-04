@@ -46,8 +46,8 @@ function App() {
 
     if (selectedNumber === end) {
       // Si el usuario selecciona el último número del rango actual, se actualiza el rango
-      setStart(end + 1);
-      setEnd(end + 5);
+      setStart(end + 1); // 6 / 10..
+      setEnd(end + 5); // 10 / 20..
 
       // Generar un nuevo conjunto de números basado en el nuevo rango
       const newNumbers = [];
@@ -97,66 +97,69 @@ function App() {
 
       <h1 className='appName'>Random Teams Generator</h1>
 
-      <div className="addPlayers">
-        <h2>Player</h2>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        <button onClick={addPlayerHandle}>Add</button>
-      </div>
+      <div className="selectionMode">
 
-      <div className="teams">
-        <h2>Teams</h2>
-        <label htmlFor="">number of teams</label>
 
-        <select onChange={handleSumNum}>
-          {availableNumbers.map((number) => (
-            <option key={number} value={number}>
-              {number}
-            </option>
+        <div className="addPlayers">
+          <h2>Player</h2>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <button onClick={addPlayerHandle}>Add</button>
+        </div>
+
+        <div className="teams">
+          <h2>Teams</h2>
+          <label htmlFor="">number of teams</label>
+
+          <select onChange={handleSumNum}>
+            {availableNumbers.map((number) => (
+              <option key={number} value={number}>
+                {number}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="playerList">
+          <h3>List of Players</h3>
+          {playersList.map((player, index) => (
+            !player.delete && (
+              <div className="playerList" key={index}>
+                <p>- {player.name}</p>
+                <button onClick={() => toggleDeleteStatus(index)}>X</button>
+              </div>
+            )
           ))}
-        </select>
-      </div>
-
-      <div className="playerList">
-        <h3>List of Players</h3>
-        {playersList.map((player, index) => (
-          !player.delete && (
-            <div className="playerList" key={index}>
-              <p>- {player.name}</p>
-              <button onClick={() => toggleDeleteStatus(index)}>X</button>
-            </div>
-          )
-        ))}
-        {/* 
+          {/* 
         - Mapear player state. ✔
         - Si delete es false, que se muestre. Si no, si delete es true que no se muetre. ✔
         - "X" cambia la propiedad delete de false a true para eliminarlo de la lista. ✔
         - Hacer la lógica para generar la cantidad de equipos seleccionados de acuerdo a los jugadores cargados. ✔
         */}
+        </div>
+
+        <div className="draw">
+          <button onClick={generateTeams}>Generate Teams</button>
+        </div>
+
+        <div className="generatedTeams">
+          <h3>Generated Teams</h3>
+          {teams.map((team, index) => (
+            <div key={index}>
+              <h4>Team {index + 1}</h4>
+              <ul>
+                {team.map((player, playerIndex) => (
+                  <li key={playerIndex}>{player.name}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
       </div>
-
-      <div className="draw">
-        <button onClick={generateTeams}>Generate Teams</button>
-      </div>
-
-      <div className="generatedTeams">
-        <h3>Generated Teams</h3>
-        {teams.map((team, index) => (
-          <div key={index}>
-            <h4>Team {index + 1}</h4>
-            <ul>
-              {team.map((player, playerIndex) => (
-                <li key={playerIndex}>{player.name}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-
     </div>
 
   )
