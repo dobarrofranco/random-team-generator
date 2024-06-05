@@ -1,14 +1,61 @@
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.backDrawTeams {
+    margin: 0 50px;
+}
+
 .appName {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: transparent;
+    animation: color-change-2x 2s linear infinite alternate both;
+}
+@keyframes color-change-2x {
+    0% {
+      background: #19dcea;
+      -webkit-background-clip: text;
+    }
+    100% {
+      background: #b22cff;
+      -webkit-background-clip: text;
+    }
 }
 
 .selectionMode {
+    display: grid;
+    grid-template-columns: 1fr .5fr 1fr;
+}
+
+.teams {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 100px;
+    flex-direction: column;
+}
+
+.teamsNumber {
+    display: flex;
+    gap: 10px;
+}
+
+.playerListContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .listOfPlayerTittle {
@@ -18,15 +65,24 @@
 }
 
 .playerList {
-    display: grid;
-    place-items: center;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.playerItems {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
 }
 
 .generateSection {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 30px;
+}
+
+.generatedTeams {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
 }

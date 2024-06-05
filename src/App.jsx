@@ -106,54 +106,65 @@ function App() {
             onChange={handleInputChange}
           />
           <button onClick={addPlayerHandle}>Add</button>
+
+          <div className="generateSection">
+            <div className="draw">
+              <button onClick={generateTeams}>Generate Teams</button>
+            </div>
+
+            <h3>Generated Teams:</h3>
+
+            <div className="generatedTeams">
+              {teams.map((team, index) => (
+                <div key={index}>
+                  <h4>Team {index + 1}</h4>
+                  <ul>
+                    {team.map((player, playerIndex) => (
+                      <li key={playerIndex}>{player.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         <div className="teams">
           <h2>Teams</h2>
-          <label htmlFor="">number of teams</label>
+          <div className="teamsNumber">
+            <label htmlFor="">amount</label>
 
-          <select onChange={handleSumNum}>
-            {availableNumbers.map((number) => (
-              <option key={number} value={number}>
-                {number}
-              </option>
+            <select onChange={handleSumNum}>
+              {availableNumbers.map((number) => (
+                <option key={number} value={number}>
+                  {number}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+
+        <div className="playerListContainer">
+          <h3 className='listOfPlayerTittle'>List of Players ({activePlayersCount})</h3>
+          <div className="playerList">
+            {playersList.map((player, index) => (
+              !player.delete && (
+                <div className='playerItems' key={index}>
+                  <p>- {player.name}</p>
+                  <button onClick={() => toggleDeleteStatus(index)}>X</button>
+                </div>
+              )
             ))}
-          </select>
+          </div>
         </div>
 
       </div>
 
-      <h3 className='listOfPlayerTittle'>List of Players ({activePlayersCount})</h3>
-      <div className="playerList">
-        {playersList.map((player, index) => (
-          !player.delete && (
-            <div className='playerItems' key={index}>
-              <p>- {player.name}</p>
-              <button onClick={() => toggleDeleteStatus(index)}>X</button>
-            </div>
-          )
-        ))}
-      </div>
 
-      <div className="generateSection">
-        <div className="draw">
-          <button onClick={generateTeams}>Generate Teams</button>
-        </div>
 
-        <div className="generatedTeams">
-          <h3>Generated Teams</h3>
-          {teams.map((team, index) => (
-            <div key={index}>
-              <h4>Team {index + 1}</h4>
-              <ul>
-                {team.map((player, playerIndex) => (
-                  <li key={playerIndex}>{player.name}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
+
 
     </div>
 
