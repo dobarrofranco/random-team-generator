@@ -109,7 +109,7 @@ function App() {
 
           <div className="generateSection">
             <div className="draw">
-              <button onClick={generateTeams}>Generate Teams</button>
+              <button className='generateButton' onClick={generateTeams}>Generate Teams</button>
             </div>
 
             <h3>Generated Teams:</h3>
