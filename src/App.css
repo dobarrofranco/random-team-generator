@@ -90,6 +90,25 @@ body {
 }
 
 /* CSS */
+
+.clearButton {
+  width: 150px;
+  height: 30px;
+  font-size: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.clearButton:hover {
+  background-color: #ff1a1a;
+}
+
 .generateButton,
 .generateButton:after {
   width: 150px;
@@ -184,11 +203,34 @@ body {
   }
 }
 
-@media (min-width: 768px) {
-  .generateButton,
+@media (max-width: 768px) {
+  /* .generateButton,
   .generateButton:after {
     width: 200px;
     height: 86px;
     line-height: 88px;
+  } */
+  .selectionMode {
+    display: grid;
+    grid-template-columns: 1fr; /* Una columna por defecto */
+    grid-template-rows: repeat(4, auto); /* Cuatro filas automáticas */
+    gap: 20px; /* Espaciado entre filas */
   }
+
+  .selectionMode > .addPlayers {
+    grid-row: 1; /* Primera fila */
+  }
+
+  .selectionMode > .playerListContainer {
+    grid-row: 2; /* Segunda fila */
+  }
+
+  .selectionMode > .teams {
+    grid-row: 3; /* Tercera fila */
+  }
+
+  .selectionMode > .generateButton {
+    grid-row: 4; /* Cuarta fila */
+  }
+  
 }
